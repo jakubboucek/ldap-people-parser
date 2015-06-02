@@ -2,7 +2,7 @@
 require(__DIR__ . '/ldap.class.php');
 
 $ldap = new LdapPeople(__DIR__ . '/ldap-parse.txt');
-$people = array();
+$people = [];
 foreach ( $ldap as $person ) {
 	if(isset($person['jpegPhoto'])) {
 		$person['jpegPhoto'] = base64_encode($person['jpegPhoto']);

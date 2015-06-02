@@ -23,7 +23,7 @@ class LdapPeople implements Iterator {
 	}
 
 	private function parsePeople($raw) {
-		return array_map( array( $this, 'readRawPeople'), $this->separeRawPeople($raw));
+		return array_map( [$this, 'readRawPeople'], $this->separeRawPeople($raw));
 	}
 
 	private function separeRawPeople($raw) {
@@ -32,7 +32,7 @@ class LdapPeople implements Iterator {
 
 	private function readRawPeople($person) {
 		$rawParams = $this->splitParams($person);
-		$params = array_filter( array_map( array( $this, 'parseParams'), $rawParams ) );
+		$params = array_filter( array_map( [$this, 'parseParams'], $rawParams ) );
 		return $params;
 	}
 
@@ -56,7 +56,7 @@ class LdapPeople implements Iterator {
 	}
 
 	private function mergeParams( $person ) {
-		$params = array();
+		$params = [];
 		foreach( $person as $param ) {
 			if( !isset( $params[$param[0]] )) {
 				$params[$param[0]] = $param[1];
@@ -65,7 +65,7 @@ class LdapPeople implements Iterator {
 				$params[$param[0]][] = $param[1];
 			}
 			else {
-				$params[$param[0]] = array( $param[1] );
+				$params[$param[0]] = [ $param[1] ];
 			}
 		}
 		return $params;
